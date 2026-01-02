@@ -11,6 +11,7 @@ app.get("/ping", (_req, res) => {
     res.send("pong");
 });
 app.use("/api/diaries", diariesRouter);
+app.use("/", diariesRouter);
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto http://localhost:${PORT}`);
 });

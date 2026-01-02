@@ -1,31 +1,28 @@
-[
-    {
-        id: 1,
-        date: "2025-01-01",
-        wheather: "rainy",
-        visibility: "poor",
-        comment: "Pretty scary flight. I'm glad I'm alive",
-    },
-    {
-        id: 2,
-        date: "2025-04-01",
-        wheather: "sunny",
-        visibility: "good",
-        comment: "Everything whent better than expected. I'm learning much",
-    },
-    {
-        id: 3,
-        date: "2025-04-15",
-        wheather: "windy",
-        visibility: "good",
-        comment: "I'm gettin pretty confident although I hit a flock of birds",
-    },
-    {
-        id: 4,
-        date: "2025-05-11",
-        wheather: "cloudy",
-        visibility: "good",
-        comment: "I almost failed the landing but I survived",
-    },
-];
-export {};
+import dairyData from "./diary.json" with { type: 'json' };
+const diaries = dairyData;
+export const getEntries = () => diaries;
+export const findById = (id) => {
+    const entry = diaries.find(d => d.id === id);
+    if (entry != null) {
+        const { comment, ...restOfDiary } = entry;
+        return restOfDiary;
+    }
+};
+export const getEntriesWithoutSensitiveInfo = () => {
+    return diaries.map(({ id, date, wheather, visibility }) => {
+        return {
+            id,
+            date,
+            wheather,
+            visibility
+        };
+    });
+};
+export const addDiary = (newDiaryEntry) => {
+    const newDiary = {
+        id: diaries.length + 1,
+        ...newDiaryEntry
+    };
+    diaries.push(newDiary);
+    return newDiary;
+};

@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "ts-standard",
     "dev": "tsc -w",
     "start": "node --watch ./dist/app.js"
   },
